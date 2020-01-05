@@ -1,0 +1,197 @@
+name: neon
+version: '0.0.1'
+category: Prelude
+author:
+  - Brooklyn Zelenka
+maintainer:
+  - be.zelenka@gmail.com
+copyright: © 2020 Brooklyn Zelenka
+license: AGPL-3.0-or-later
+license-file: LICENSE
+github: expede/neon
+tested-with: GHC==8.6.5
+extra-source-files:
+  - README.md
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  # Warn about too little
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wpartial-fields
+  # Warn about too much
+  - -Wredundant-constraints
+  # Prettier Development
+  - -fhide-source-paths
+
+default-extensions:
+  - ApplicativeDo
+  - BangPatterns
+  - BinaryLiterals
+  - BlockArguments
+  - ConstraintKinds
+  - DataKinds
+  - DeriveAnyClass
+  - DeriveFoldable
+  - DeriveFunctor
+  - DeriveGeneric
+  - DeriveLift
+  - DeriveTraversable
+  - DerivingStrategies
+  - DuplicateRecordFields
+  - EmptyDataDecls
+  - FlexibleContexts
+  - FlexibleInstances
+  - FunctionalDependencies
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - KindSignatures
+  - LambdaCase
+  - LiberalTypeSynonyms
+  - MultiParamTypeClasses
+  - MultiWayIf
+  - NamedFieldPuns
+  - NoImplicitPrelude
+  - NoMonomorphismRestriction
+  - NumericUnderscores
+  - OverloadedStrings
+  - OverloadedLabels
+  - OverloadedLists
+  - PostfixOperators
+  - RankNTypes
+  - RecordWildCards
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - TypeSynonymInstances
+  - TemplateHaskell
+  - TypeOperators
+  - ViewPatterns
+
+dependencies:
+  - aeson
+  - aeson-casing
+  - base
+  - bytestring
+  - data-default-class
+  - data-has
+  - envy
+  - flow
+  - filepath
+  - fsnotify
+  - haskeline
+  - http-client
+  - http-client-tls
+  - http-media
+  - http-types
+  - lens
+  - mime-types
+  - monad-logger
+  - monad-time
+  - mtl
+  - random-bytestring
+  - resource-pool
+  - regex-compat
+  - rio
+  - rio-orphans
+  - scientific
+  - streaming-commons
+  - swagger2
+  - text
+  - time
+  - transformers
+  - unliftio
+  - uuid
+  - uuid-types
+  - word8
+  - vector
+  - yaml
+
+library:
+  source-dirs: library
+
+tests:
+  neon-doctest:
+    main: Main.hs
+    source-dirs: test/doctest
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - directory
+      - directory-tree
+      - doctest
+      - Glob
+      - lens-aeson
+      - QuickCheck
+      - yaml
+
+  neon-test:
+    main: Main.hs
+    source-dirs:
+      - library
+      - test
+      - test/testsuite
+    ghc-options:
+      - -fhpc
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - aeson
+      - hspec
+      - hspec-wai
+      - hspec-wai-json
+      - neon
+      - tasty
+      - tasty-hunit
+      - tasty-hspec
+      - tasty-smallcheck
+      - tasty-rerun
+      - transformers
+
+  # neon-coverage-code:
+  #   main: Main.hs
+  #   source-dirs: test/code-coverage
+  #   ghc-options:
+  #     - -fhpc
+  #   dependencies:
+  #     - base
+  #     - neon
+  #     - process
+  #     - regex-compat
+
+  # neon-coverage-docs:
+  #   main: Main.hs
+  #   source-dirs: test/doc-coverage
+  #   dependencies:
+  #     - doctest
+  #     - process
+  #     - regex-compat
+
+  neon-lint:
+    main: Main.hs
+    source-dirs: test/lint
+    dependencies:
+      - base
+      - hlint
+      - rio
+
+benchmarks:
+  neon-benchmark:
+    main: Main.hs
+    source-dirs: benchmark
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -O2
+    dependencies:
+      - criterion
+      - neon
