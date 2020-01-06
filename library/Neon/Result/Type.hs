@@ -1,4 +1,4 @@
-module Neon where
+module Neon.Result.Type (Result (..)) where
 
 import RIO
 
@@ -6,9 +6,6 @@ data Result err value
   = Err err
   | Ok  value
   deriving (Show, Eq)
-
-newtype ResultT err m val
-  = ResultT { runResultT :: m (Result err val) }
 
 instance Functor (Result err) where
   fmap _ (Err err)   = Err err

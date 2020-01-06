@@ -1,9 +1,8 @@
-module Neon.Class.Resultable where
+module Neon.Result.Resultable.Class (Resultable (..)) where
 
 import RIO
 
-import Neon.Data.Result
-import Neon.Data.Optional
+import Neon.Result.Type
 
 class Resultable a err value where
   toResult :: a -> Result err value
@@ -14,8 +13,4 @@ instance Resultable (Either err value) err value where
 
 instance Resultable (Maybe value) () value where
   toResult Nothing      = Err ()
-  toResult (Just value) = Ok value
-
-instance Resultable (Maybe value) OmitArgument value where
-  toResult Nothing      = omit
   toResult (Just value) = Ok value

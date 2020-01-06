@@ -1,10 +1,12 @@
-module Neon.Class.Functoral.Functor
+module Neon.Functorial.Functor
   ( Functor (..)
   , map
   , over
   ) where
 
-import RIO (Functor (..), flip)
+import Prelude (Functor (..), flip)
+
+-- import GHC
 
 -- [1,2,3] |> map (+ 1)
 map :: Functor f => (a -> b) -> f a -> f b

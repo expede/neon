@@ -1,10 +1,10 @@
-module Neon.Class.Equatable
+module Neon.Equatable.Class
   ( module RIO
   , (!=)
   ) where
 
-import RIO (Eq (..))
+import RIO (Eq (..), Bool)
 
-infix 4 (!=)
+infix 4 !=
 (!=) :: Eq a => a -> a -> Bool
 (!=) = (/=)
